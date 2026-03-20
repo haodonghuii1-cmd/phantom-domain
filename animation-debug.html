@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画调试页面</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .debug-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            max-width: 300px;
+            z-index: 9999;
+        }
+
+        .status-item {
+            margin: 10px 0;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .success { background: #22c55e33; color: #22c55e; }
+        .error { background: #ef444433; color: #ef4444; }
+        .info { background: #3b82f633; color: #3b82f6; }
+
+        .test-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .test-character {
+            width: 200px;
+            height: 300px;
+            background: #333;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 20px;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-info">
+        <h3>🔍 动画调试信息</h3>
+        <div id="debug-output"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-character character">测试人物 1</div>
+        <div class="test-character character">测试人物 2</div>
+        <div class="test-character character">测试人物 3</div>
+    </div>
+
+    <script>
+        const debug = document.getElementById('debug-output');
+
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status-item ${type}`;
+            div.textContent = message;
+            debug.appendChild(div);
+        }
+
+        // 检查 script.js 是否加载
+        log('开始加载 script.js...');
+    </script>
+
+    <script src="script.js"></script>
+
+    <script>
+        // 调试脚本
+        setTimeout(() => {
+            // 检查动画类是否添加
+            const floatingChars = document.querySelectorAll('.floating-character');
+            if (floatingChars.length > 0) {
+                log(`✅ 找到 ${floatingChars.length} 个漂浮元素`, 'success');
+            } else {
+                log('❌ 没有找到漂浮元素', 'error');
+            }
+
+            // 检查CSS是否注入
+            const styles = document.querySelectorAll('style');
+            const hasAnimationCSS = Array.from(styles).some(style =>
+                style.textContent.includes('slowFloat')
+            );
+
+            if (hasAnimationCSS) {
+                log('✅ CSS动画样式已注入', 'success');
+            } else {
+                log('❌ CSS动画样式未注入', 'error');
+            }
+
+            // 手动测试悬停效果
+            const testChars = document.querySelectorAll('.test-character');
+            testChars.forEach((char, index) => {
+                // 添加漂浮类
+                char.classList.add('floating-character');
+                char.style.animationDelay = `${index * 2}s`;
+
+                // 添加悬停监听
+                char.addEventListener('mouseenter', function() {
+                    log(`鼠标进入元素 ${index + 1}`, 'info');
+                    this.classList.add('hover-pause');
+                    this.style.transform = 'scale(1.2)';
+                });
+
+                char.addEventListener('mouseleave', function() {
+                    log(`鼠标离开元素 ${index + 1}`, 'info');
+                    this.classList.remove('hover-pause');
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // 检查原始页面的人物元素
+            if (window.location.pathname.includes('animation-debug')) {
+                log('当前在调试页面', 'info');
+            }
+
+            // 检查是否有错误
+            window.addEventListener('error', (e) => {
+                log(`JS错误: ${e.message}`, 'error');
+            });
+
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -537,6 +537,7 @@ body {
     }
 }
 
+/* Character animation - moved to JavaScript for better control
 .character {
     animation: float 3s ease-in-out infinite;
 }
@@ -553,6 +554,7 @@ body {
 .character-right {
     animation-delay: 1s;
 }
+*/
 
 /* Fade in animation for sections */
 @keyframes fadeInUp {

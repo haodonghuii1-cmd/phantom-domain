@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Domain - 新一代手办收藏品</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <!-- Background Image -->
+            <img src="images/hero-bg.jpg" alt="Background" class="hero-bg">
+
+            <!-- Gradient Header -->
+            <div class="hero-gradient"></div>
+
+            <!-- Character Images - positioned absolutely -->
+            <img src="images/character1.png" alt="Character 1" class="character character-left">
+            <img src="images/character2.png" alt="Character 2" class="character character-center">
+            <img src="images/character3.png" alt="Character 3" class="character character-right">
+
+            <!-- Decorative clouds -->
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+
+            <div class="hero-content">
+                <h1 class="hero-title">Phantom Domain.</h1>
+                <p class="hero-subtitle">A masterpiece reborn. Now in 1/7 scale.</p>
+                <button class="cta-button">
+                    <span>Starting at $199</span>
+                    <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Features Section 1 - Massive Scale (第二屏) -->
+        <section class="features-section black-bg" style="position: relative; height: 1000px;">
+            <!-- 文字内容 -->
+            <h2 class="feature-title" style="position: absolute; left: 131px; top: 193px; width: 369px;">Massive scale.<br>Micro details.</h2>
+            <p class="feature-description" style="position: absolute; left: 128px; top: 346px; width: 580px;">
+                Standing at an imposing 285mm, every inch of the Phantom Domain
+                is sculpted with relentless precision. The silhouette commands
+                attention, while the microscopic panel lines reward endless inspection.
+            </p>
+
+            <!-- 配图 - 调整层级顺序，产品盒子在后，人物在前 -->
+            <img src="images/product-box.png" alt="Product box" class="product-box" style="position: absolute; left: 851px; top: 327px; width: 504px; height: 378px; z-index: 1;">
+            <img src="images/character2.png" alt="Girl with dog" style="position: absolute; left: 954px; top: 135px; width: 312px; height: 497px; z-index: 2;">
+        </section>
+
+        <!-- Features Section 2 - Painted by Hand (第三屏) -->
+        <section class="features-section black-bg" style="position: relative; height: 900px;">
+            <!-- 文字内容 -->
+            <h2 class="feature-title" style="position: absolute; right: 234px; top: 98px; width: 482px;">Painted by hand.<br>Driven by passion.</h2>
+            <p class="feature-description" style="position: absolute; right: 126px; top: 248px; width: 594px;">
+                We abandoned standard mass-production techniques. Instead, the
+                Phantom Domain undergoes a rigorous 7-layer masking and painting process.
+                <br><br>
+                Master artisans hand-apply the final shading, ensuring the metallic
+                gradients and battle-worn textures are unique to every single piece.
+                Sealed with a UV-resistant clear coat, its brilliance outlasts time.
+            </p>
+
+            <!-- 配图 - 调整人物位置，更靠左 -->
+            <img src="images/showcase2.png" alt="Showcase 2" class="showcase2" style="position: absolute; left: 125px; top: 0; width: 353px; height: 530px;">
+            <img src="images/showcase1.png" alt="Showcase 1" class="showcase1" style="position: absolute; left: 193px; top: 406px; width: 408px; height: 214px; z-index: 2;">
+            <img src="images/character1.png" alt="Girl character" style="position: absolute; left: 470px; top: 67px; width: 271px; height: 481px; transform: scaleX(-1); z-index: 1;">
+        </section>
+
+        <!-- Engineering Section (第四屏) -->
+        <section class="engineering-section" style="position: relative; height: 1100px;">
+            <img src="images/engineering-bg.jpg" alt="Engineering background" style="position: absolute; left: -2px; top: 0; width: 1547px; height: 847px;">
+
+            <!-- 文字内容 -->
+            <h2 class="section-title" style="position: absolute; left: 131px; top: 32px; width: 543px; color: #fff;">Engineering meets art.</h2>
+            <p class="section-description" style="position: absolute; left: 128px; top: 100px; width: 549px;">
+                Standing at an imposing 285mm, every inch of the Phantom Domain
+                is sculpted with relentless precision. The silhouette commands
+                attention, while the microscopic panel lines reward endless inspection.
+            </p>
+
+            <h3 class="sub-title" style="position: absolute; left: 131px; top: 306px; width: 572px; color: #fff;">Die-cast Alloy Skeleton.</h3>
+            <p class="sub-description" style="position: absolute; left: 128px; top: 374px; width: 549px;">
+                High-rigidity alloy joints ensure maximum stability.
+                Even extreme aerial poses remain locked in place forever.
+            </p>
+
+            <!-- 角色图片 - 调整位置，使其更高，在草地上 -->
+            <img src="images/character3.png" alt="Character in action" style="position: absolute; right: 238px; bottom: 254px; width: 507px; height: 760px; z-index: 2;">
+        </section>
+
+        <!-- Specs Section -->
+        <section class="specs-section">
+            <div class="container">
+                <div class="specs-header">
+                    <h2 class="specs-title">Powerful performance, no compromises.</h2>
+                    <p class="specs-subtitle">Explore the technical details behind Nova Glass.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-card">
+                        <div class="spec-icon">
+                            <img src="images/battery-icon.svg" alt="Battery">
+                        </div>
+                        <h3 class="spec-name">Battery Life</h3>
+                        <p class="spec-description">
+                            Up to 8 hours of continuous use on a single charge,
+                            and 30 hours with the charging case.
+                        </p>
+                        <div class="spec-value">30h</div>
+                    </div>
+
+                    <div class="spec-card">
+                        <div class="spec-icon">
+                            <img src="images/bluetooth-icon.svg" alt="Connectivity">
+                        </div>
+                        <h3 class="spec-name">Connectivity</h3>
+                        <p class="spec-description">
+                            Equipped with the latest Bluetooth 5.3 chip for stable
+                            connections and ultra-low 45ms latency.
+                        </p>
+                        <div class="spec-value">BT 5.3</div>
+                    </div>
+
+                    <div class="spec-card">
+                        <div class="spec-icon">
+                            <img src="images/shield-icon.svg" alt="Durability">
+                        </div>
+                        <h3 class="spec-name">Durability</h3>
+                        <p class="spec-description">
+                            IP54 dust and water resistance, fearless of daily
+                            sweat and light rain splashes.
+                        </p>
+                        <div class="spec-value">IP54</div>
+                    </div>
+
+                    <div class="spec-card">
+                        <div class="spec-icon">
+                            <img src="images/lens-icon.svg" alt="Lens">
+                        </div>
+                        <h3 class="spec-name">Lens Material</h3>
+                        <p class="spec-description">
+                            Anti-glare, UV-blocking polarized lenses, with
+                            support for custom prescription lenses.
+                        </p>
+                        <div class="spec-value">UV400</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">Unlock a New Vision.</h2>
+                <p class="cta-description">
+                    Order now, ships in 3-5 business days.
+                    Enjoy a 14-day no-questions-asked return policy.
+                </p>
+                <div class="cta-actions">
+                    <button class="buy-button">Buy Now - $499</button>
+                    <a href="#" class="finance-link">Learn about financing options</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-left">
+                    <span class="brand">NOVA<span class="brand-light">GLASS</span></span>
+                    <span class="copyright">© 2026 Nova Tech. All rights reserved.</span>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script-debug.js"></script>
+</body>
+</html>

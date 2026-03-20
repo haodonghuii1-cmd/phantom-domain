@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画效果测试</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #000;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .test-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .test-element {
+            background: #333;
+            padding: 40px;
+            margin: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #444;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        .success { color: #4ade80; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="status">
+        <h3>动画测试状态</h3>
+        <p id="script-status">检查脚本加载...</p>
+        <p id="animation-status">检查动画类...</p>
+        <p id="observer-status">检查观察器...</p>
+    </div>
+
+    <div class="test-section">
+        <h1 class="hero-title">测试标题动画</h1>
+        <p class="hero-subtitle">测试副标题动画</p>
+        <button class="cta-button">测试按钮</button>
+    </div>
+
+    <div class="test-section">
+        <div class="test-element fade-in-up">
+            <h2 class="feature-title">淡入上升效果</h2>
+            <p>这个元素应该从下往上淡入</p>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-element fade-in-scale">
+            <h2>缩放淡入效果</h2>
+            <p>这个元素应该缩放淡入</p>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <div class="spec-card test-element">
+            <h3>规格卡片测试</h3>
+            <p>悬停时应该上浮</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 测试脚本
+        window.addEventListener('DOMContentLoaded', () => {
+            const scriptStatus = document.getElementById('script-status');
+            const animationStatus = document.getElementById('animation-status');
+            const observerStatus = document.getElementById('observer-status');
+
+            // 检查脚本是否加载
+            if (typeof IntersectionObserver !== 'undefined') {
+                scriptStatus.innerHTML = '✅ 脚本加载成功';
+                scriptStatus.className = 'success';
+            } else {
+                scriptStatus.innerHTML = '❌ 脚本加载失败';
+                scriptStatus.className = 'error';
+            }
+
+            // 检查动画类是否添加
+            setTimeout(() => {
+                const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-scale, .fade-in');
+                if (animatedElements.length > 0) {
+                    animationStatus.innerHTML = `✅ 找到 ${animatedElements.length} 个动画元素`;
+                    animationStatus.className = 'success';
+                } else {
+                    animationStatus.innerHTML = '❌ 未找到动画元素';
+                    animationStatus.className = 'error';
+                }
+
+                // 检查是否有观察器在工作
+                const visibleElements = document.querySelectorAll('.visible');
+                observerStatus.innerHTML = `🔍 已触发动画: ${visibleElements.length} 个元素`;
+
+                // 监听滚动
+                window.addEventListener('scroll', () => {
+                    const visibleNow = document.querySelectorAll('.visible');
+                    observerStatus.innerHTML = `🔍 已触发动画: ${visibleNow.length} 个元素`;
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

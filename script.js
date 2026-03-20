@@ -45,22 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // 鼠标悬停效果
         char.addEventListener('mouseenter', function() {
             this.classList.add('hover-pause');
-            // 保持原有的transform并添加放大
-            if (this.classList.contains('character-left') || this.style.transform.includes('scaleX(-1)')) {
-                this.style.transform = 'scale(1.2) scaleX(-1.2)';
-            } else {
-                this.style.transform = 'scale(1.2)';
-            }
+            this.classList.add('hover-scale');
         });
 
         char.addEventListener('mouseleave', function() {
             this.classList.remove('hover-pause');
-            // 恢复原有的transform
-            if (this.classList.contains('character-left') || this.style.transform.includes('scaleX(-1)')) {
-                this.style.transform = 'scaleX(-1)';
-            } else {
-                this.style.transform = 'scale(1)';
-            }
+            this.classList.remove('hover-scale');
         });
     });
 
@@ -273,6 +263,16 @@ style.textContent = `
     /* 悬停时暂停动画 */
     .floating-character.hover-pause {
         animation-play-state: paused !important;
+    }
+
+    /* 悬停时缩放效果 */
+    .floating-character.hover-scale {
+        transform: scale(1.1) !important;
+    }
+
+    /* 特殊处理镜像的人物 */
+    .character-left.hover-scale {
+        transform: scale(1.1) scaleX(-1.1) !important;
     }
 
     @keyframes slowFloat {

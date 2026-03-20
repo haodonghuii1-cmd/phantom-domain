@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('hover-pause');
             // 保持原有的transform并添加放大
             if (this.classList.contains('character-left') || this.style.transform.includes('scaleX(-1)')) {
-                this.style.transform = 'scale(1.1) scaleX(-1.1)';
+                this.style.transform = 'scale(1.2) scaleX(-1.2)';
             } else {
-                this.style.transform = 'scale(1.1)';
+                this.style.transform = 'scale(1.2)';
             }
         });
 

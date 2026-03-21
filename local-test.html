@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地镜像测试</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #000;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            gap: 100px;
+            align-items: center;
+            justify-content: center;
+            margin: 100px 0;
+        }
+
+        /* 模拟原始的character样式 */
+        .character {
+            width: 200px;
+            height: 300px;
+            background: url('images/character1.png') no-repeat center/contain;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* 如果没有图片，用文字代替 */
+        .character::before {
+            content: "人物";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* 模拟character-left的原始样式 */
+        .character-left {
+            transform: scaleX(-1);
+            animation: slowFloat 8s ease-in-out infinite;
+        }
+
+        /* 测试1: 当前的matrix方法 */
+        .test1 .character-left:hover {
+            animation: none !important;
+            transform: matrix(-1.1, 0, 0, 1.1, 0, 0) !important;
+        }
+
+        /* 测试2: 使用CSS变量方法 */
+        .test2 .character-left {
+            --scale-x: -1;
+            --scale-y: 1;
+            transform: scale(var(--scale-x), var(--scale-y));
+            animation: slowFloat 8s ease-in-out infinite;
+            transition: transform 0.4s ease;
+        }
+
+        .test2 .character-left:hover {
+            --scale-x: -1.1;
+            --scale-y: 1.1;
+            animation: none !important;
+        }
+
+        /* 测试3: 包装器方法 */
+        .test3 .character-wrapper {
+            transform: scaleX(-1);
+        }
+
+        .test3 .character {
+            transform: scale(1);
+            transition: transform 0.4s ease;
+            animation: slowFloat 8s ease-in-out infinite;
+        }
+
+        .test3 .character:hover {
+            transform: scale(1.1);
+            animation: none !important;
+        }
+
+        @keyframes slowFloat {
+            0%, 100% {
+                transform: translateY(0) scaleX(var(--scale-x, -1));
+            }
+            50% {
+                transform: translateY(-30px) scaleX(var(--scale-x, -1));
+            }
+        }
+
+        .test-label {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #888;
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 50px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">镜像悬停测试 - 找出正确的方案</h1>
+
+    <div class="container">
+        <div class="test1">
+            <div class="test-label">方案1: Matrix</div>
+            <div class="character character-left"></div>
+        </div>
+
+        <div class="test2">
+            <div class="test-label">方案2: CSS变量</div>
+            <div class="character character-left"></div>
+        </div>
+
+        <div class="test3">
+            <div class="test-label">方案3: 包装器</div>
+            <div class="character-wrapper">
+                <div class="character"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        <p>悬停每个方案，查看哪个能正确保持镜像并放大</p>
+        <p>正确的效果：人物面向左侧，悬停时保持面向左侧并放大</p>
+        <p>错误的效果：悬停时人物翻转成面向右侧</p>
+    </div>
+
+    <script>
+        // 为每个方案添加点击事件，输出当前transform
+        document.querySelectorAll('.character, .character-left').forEach((el, index) => {
+            el.addEventListener('mouseenter', function() {
+                const computed = window.getComputedStyle(this);
+                console.log(`方案${Math.floor(index/1)+1} transform:`, computed.transform);
+            });
+        });
+    </script>
+</body>
+</html>

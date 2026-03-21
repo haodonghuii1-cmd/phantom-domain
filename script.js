@@ -230,9 +230,18 @@ style.textContent = `
 
     /* Hero人物缓慢漂浮动画 */
     .floating-character {
-        animation: slowFloat 8s ease-in-out infinite;
         cursor: pointer;
         transition: transform 0.4s ease;
+    }
+
+    /* 为普通人物设置动画 */
+    .floating-character:not(.character-left) {
+        animation: slowFloat 8s ease-in-out infinite;
+    }
+
+    /* 为镜像人物设置特殊动画 */
+    .character-left.floating-character {
+        animation: slowFloatMirror 8s ease-in-out infinite;
     }
 
     .floating-character:nth-child(1) {
@@ -250,23 +259,34 @@ style.textContent = `
     }
 
     /* 悬停时完全停止动画并应用缩放 */
-    .floating-character:hover {
+    .floating-character:not(.character-left):hover {
         animation: none !important;
         transform: scale(1.1) !important;
     }
 
-    /* 特殊处理镜像的人物 - 使用matrix保持镜像状态同时放大 */
-    .character-left:hover {
+    /* 镜像人物悬停效果 */
+    .character-left.floating-character:hover {
         animation: none !important;
-        transform: matrix(-1.1, 0, 0, 1.1, 0, 0) !important;
+        transform: scaleX(-1.1) scaleY(1.1) !important;
     }
 
+    /* 普通漂浮动画 */
     @keyframes slowFloat {
         0%, 100% {
             transform: translateY(0);
         }
         50% {
             transform: translateY(-30px);
+        }
+    }
+
+    /* 镜像漂浮动画 */
+    @keyframes slowFloatMirror {
+        0%, 100% {
+            transform: translateY(0) scaleX(-1);
+        }
+        50% {
+            transform: translateY(-30px) scaleX(-1);
         }
     }
 

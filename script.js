@@ -231,18 +231,17 @@ style.textContent = `
     /* Hero人物缓慢漂浮动画 */
     .floating-character {
         cursor: pointer;
-        position: relative;
-        animation: slowFloatPosition 8s ease-in-out infinite;
-        transition: transform 0.4s ease;
+        transition: all 0.4s ease;
     }
 
-    /* 设置初始transform状态 */
+    /* 为普通人物设置动画 */
     .floating-character:not(.character-left) {
-        transform: scale(1);
+        animation: slowFloat 8s ease-in-out infinite;
     }
 
+    /* 为镜像人物设置特殊动画 */
     .character-left.floating-character {
-        transform: scaleX(-1);
+        animation: slowFloatMirror 8s ease-in-out infinite;
     }
 
     .floating-character:nth-child(1) {
@@ -259,27 +258,37 @@ style.textContent = `
         animation-delay: -4s;
     }
 
-    /* 悬停时暂停位置动画并缩放 */
+    /* 悬停时停止动画并缩放 */
     .floating-character:hover {
-        animation-play-state: paused;
+        animation-play-state: paused !important;
     }
 
     .floating-character:not(.character-left):hover {
-        transform: scale(1.1);
+        transform: scale(1.1) !important;
     }
 
-    /* 镜像人物悬停效果 - 保持镜像并放大 */
+    /* 镜像人物悬停效果 */
     .character-left.floating-character:hover {
-        transform: scaleX(-1.1) scaleY(1.1);
+        transform: scaleX(-1.1) scaleY(1.1) !important;
     }
 
-    /* 使用top属性做漂浮动画，不影响transform */
-    @keyframes slowFloatPosition {
+    /* 普通漂浮动画 */
+    @keyframes slowFloat {
         0%, 100% {
-            top: 0px;
+            transform: translateY(0);
         }
         50% {
-            top: -30px;
+            transform: translateY(-30px);
+        }
+    }
+
+    /* 镜像漂浮动画 */
+    @keyframes slowFloatMirror {
+        0%, 100% {
+            transform: translateY(0) scaleX(-1);
+        }
+        50% {
+            transform: translateY(-30px) scaleX(-1);
         }
     }
 

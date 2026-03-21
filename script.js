@@ -231,18 +231,18 @@ style.textContent = `
     /* Hero人物缓慢漂浮动画 */
     .floating-character {
         cursor: pointer;
-        transition: transform 0.4s ease !important;
+        position: relative;
+        animation: slowFloatPosition 8s ease-in-out infinite;
+        transition: transform 0.4s ease;
     }
 
-    /* 为普通人物设置动画 */
+    /* 设置初始transform状态 */
     .floating-character:not(.character-left) {
-        animation: slowFloat 8s ease-in-out infinite;
+        transform: scale(1);
     }
 
-    /* 为镜像人物设置特殊动画 */
     .character-left.floating-character {
-        animation: slowFloatMirror 8s ease-in-out infinite;
-        transition: transform 0.4s ease !important;
+        transform: scaleX(-1);
     }
 
     .floating-character:nth-child(1) {
@@ -259,37 +259,27 @@ style.textContent = `
         animation-delay: -4s;
     }
 
-    /* 悬停时完全停止动画并应用缩放 */
+    /* 悬停时暂停位置动画并缩放 */
+    .floating-character:hover {
+        animation-play-state: paused;
+    }
+
     .floating-character:not(.character-left):hover {
-        animation-name: none !important;
-        transform: scale(1.1) !important;
-        transition: transform 0.4s ease !important;
+        transform: scale(1.1);
     }
 
-    /* 镜像人物悬停效果 */
+    /* 镜像人物悬停效果 - 保持镜像并放大 */
     .character-left.floating-character:hover {
-        animation-name: none !important;
-        transform: scaleX(-1.1) scaleY(1.1) !important;
-        transition: transform 0.4s ease !important;
+        transform: scaleX(-1.1) scaleY(1.1);
     }
 
-    /* 普通漂浮动画 */
-    @keyframes slowFloat {
+    /* 使用top属性做漂浮动画，不影响transform */
+    @keyframes slowFloatPosition {
         0%, 100% {
-            transform: translateY(0);
+            top: 0px;
         }
         50% {
-            transform: translateY(-30px);
-        }
-    }
-
-    /* 镜像漂浮动画 */
-    @keyframes slowFloatMirror {
-        0%, 100% {
-            transform: translateY(0) scaleX(-1);
-        }
-        50% {
-            transform: translateY(-30px) scaleX(-1);
+            top: -30px;
         }
     }
 

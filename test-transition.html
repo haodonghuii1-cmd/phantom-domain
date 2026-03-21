@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过渡效果测试</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #000;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            margin: 100px 0;
+        }
+
+        .box {
+            width: 150px;
+            height: 200px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* 测试1: 当前方法 */
+        .test1 {
+            animation: floatMirror 3s ease-in-out infinite;
+            transition: transform 0.4s ease !important;
+        }
+
+        .test1:hover {
+            animation-name: none !important;
+            transform: scaleX(-1.1) scaleY(1.1) !important;
+            transition: transform 0.4s ease !important;
+        }
+
+        @keyframes floatMirror {
+            0%, 100% {
+                transform: translateY(0) scaleX(-1);
+            }
+            50% {
+                transform: translateY(-20px) scaleX(-1);
+            }
+        }
+
+        /* 测试2: 使用top而不是transform做动画 */
+        .test2-wrapper {
+            position: relative;
+        }
+
+        .test2 {
+            position: relative;
+            animation: floatTop 3s ease-in-out infinite;
+            transform: scaleX(-1);
+            transition: transform 0.4s ease;
+        }
+
+        .test2:hover {
+            animation-play-state: paused;
+            transform: scaleX(-1.1) scaleY(1.1);
+        }
+
+        @keyframes floatTop {
+            0%, 100% {
+                top: 0;
+            }
+            50% {
+                top: -20px;
+            }
+        }
+
+        /* 测试3: 分离动画和变换 */
+        .test3-float {
+            animation: floatY 3s ease-in-out infinite;
+        }
+
+        .test3 {
+            transform: scaleX(-1);
+            transition: transform 0.4s ease;
+        }
+
+        .test3:hover {
+            transform: scaleX(-1.1) scaleY(1.1);
+        }
+
+        @keyframes floatY {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .label {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 50px;
+            color: #666;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">过渡效果测试</h1>
+
+    <div class="container">
+        <div>
+            <div class="label">测试1: 当前方法<br>(animation-name: none)</div>
+            <div class="box test1">左</div>
+        </div>
+
+        <div>
+            <div class="label">测试2: 使用position动画<br>(不影响transform)</div>
+            <div class="test2-wrapper">
+                <div class="box test2">左</div>
+            </div>
+        </div>
+
+        <div>
+            <div class="label">测试3: 嵌套元素<br>(分离动画和缩放)</div>
+            <div class="test3-float">
+                <div class="box test3">左</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        <p>将鼠标悬停在每个方块上，看哪个有平滑的缩放过渡效果</p>
+        <p>正确的效果：悬停时有0.4秒的平滑放大动画</p>
+    </div>
+</body>
+</html>

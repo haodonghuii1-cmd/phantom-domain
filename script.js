@@ -255,10 +255,10 @@ style.textContent = `
         transform: scale(1.1) !important;
     }
 
-    /* 特殊处理镜像的人物 */
+    /* 特殊处理镜像的人物 - 保持镜像状态同时放大 */
     .character-left:hover {
         animation: none !important;
-        transform: scale(-1.1, 1.1) !important;
+        transform: scaleX(-1) scale(1.1) !important;
     }
 
     @keyframes slowFloat {

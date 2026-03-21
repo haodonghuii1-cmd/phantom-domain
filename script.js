@@ -258,7 +258,7 @@ style.textContent = `
     /* 特殊处理镜像的人物 */
     .character-left:hover {
         animation: none !important;
-        transform: scale(1.1) scaleX(-1.1) !important;
+        transform: scale(-1.1, 1.1) !important;
     }
 
     @keyframes slowFloat {

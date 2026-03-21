@@ -231,7 +231,7 @@ style.textContent = `
     /* Hero人物缓慢漂浮动画 */
     .floating-character {
         cursor: pointer;
-        transition: transform 0.4s ease;
+        transition: transform 0.4s ease !important;
     }
 
     /* 为普通人物设置动画 */
@@ -242,7 +242,7 @@ style.textContent = `
     /* 为镜像人物设置特殊动画 */
     .character-left.floating-character {
         animation: slowFloatMirror 8s ease-in-out infinite;
-        transition: transform 0.4s ease;
+        transition: transform 0.4s ease !important;
     }
 
     .floating-character:nth-child(1) {
@@ -261,14 +261,16 @@ style.textContent = `
 
     /* 悬停时完全停止动画并应用缩放 */
     .floating-character:not(.character-left):hover {
-        animation: none !important;
+        animation-name: none !important;
         transform: scale(1.1) !important;
+        transition: transform 0.4s ease !important;
     }
 
     /* 镜像人物悬停效果 */
     .character-left.floating-character:hover {
-        animation: none !important;
+        animation-name: none !important;
         transform: scaleX(-1.1) scaleY(1.1) !important;
+        transition: transform 0.4s ease !important;
     }
 
     /* 普通漂浮动画 */

@@ -41,17 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         char.classList.add('floating-character');
         // 设置不同的动画延迟，让漂浮不同步
         char.style.animationDelay = `${index * 2}s`;
-
-        // 鼠标悬停效果
-        char.addEventListener('mouseenter', function() {
-            this.classList.add('hover-pause');
-            this.classList.add('hover-scale');
-        });
-
-        char.addEventListener('mouseleave', function() {
-            this.classList.remove('hover-pause');
-            this.classList.remove('hover-scale');
-        });
     });
 
     // 为第二、三、四屏添加分层动画
@@ -260,18 +249,15 @@ style.textContent = `
         animation-delay: -4s;
     }
 
-    /* 悬停时暂停动画 */
-    .floating-character.hover-pause {
-        animation-play-state: paused !important;
-    }
-
-    /* 悬停时缩放效果 */
-    .floating-character.hover-scale {
+    /* 悬停时完全停止动画并应用缩放 */
+    .floating-character:hover {
+        animation: none !important;
         transform: scale(1.1) !important;
     }
 
     /* 特殊处理镜像的人物 */
-    .character-left.hover-scale {
+    .character-left:hover {
+        animation: none !important;
         transform: scale(1.1) scaleX(-1.1) !important;
     }
 

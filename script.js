@@ -242,6 +242,7 @@ style.textContent = `
     /* 为镜像人物设置特殊动画 */
     .character-left.floating-character {
         animation: slowFloatMirror 8s ease-in-out infinite;
+        transition: transform 0.4s ease;
     }
 
     .floating-character:nth-child(1) {
